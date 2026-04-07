@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waypoint AI — AI-Powered Growth for Small Businesses | waypointai.ca</title>
+  <link rel="canonical" href="https://waypointai.ca" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --background: #ffffff;
+      --background-alt: #f8fafc;
+      --foreground: #0f172a;
+      --card: #ffffff;
+      --muted: #f1f5f9;
+      --muted-foreground: #64748b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: #dbeafe;
+      --accent-subtle: #eff6ff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --radius: 0.75rem;
+      --success: #16a34a;
+      --success-light: #dcfce7;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--foreground); }
+    h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+    h2 { font-size: clamp(1.8rem, 3.5vw, 2.75rem); }
+    h3 { font-size: 1.2rem; }
+    p { color: var(--muted-foreground); line-height: 1.7; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: var(--radius);
+      font-size: 0.95rem; font-weight: 600; text-decoration: none;
+      transition: all 0.2s ease; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: var(--background); color: var(--foreground);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-outline:hover { background: var(--muted); border-color: var(--accent); color: var(--accent); }
+
+    /* ===== BADGE ===== */
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      font-size: 0.8rem; font-weight: 600;
+      background: var(--accent-subtle); color: var(--accent);
+      border: 1px solid var(--accent-light);
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem 1.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 1.2rem; font-weight: 700; color: var(--foreground);
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 18px; height: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted-foreground); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--foreground); }
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--foreground); cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--background);
+        border-bottom: 1px solid var(--border); padding: 1.5rem; gap: 1rem;
+      }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 92vh; display: flex; align-items: center;
+      padding-top: 5rem; position: relative; overflow: hidden;
+      background: linear-gradient(180deg, var(--accent-subtle) 0%, var(--background) 100%);
+    }
+    .hero-content { position: relative; text-align: center; max-width: 780px; margin: 0 auto; }
+    .hero h1 { margin-bottom: 1.5rem; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 1.15rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; margin-top: 4rem;
+      padding-top: 3rem; border-top: 1px solid var(--border);
+    }
+    .hero-stat h3 { font-size: 2rem; color: var(--accent); margin-bottom: 0.15rem; }
+    .hero-stat p { font-size: 0.85rem; }
+
+    /* ===== PROBLEM SECTION ===== */
+    .problem { background: var(--background); }
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .problem-card {
+      padding: 1.75rem; border-radius: var(--radius);
+      background: var(--background); border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm); transition: all 0.2s;
+    }
+    .problem-card:hover { box-shadow: var(--shadow-md); border-color: #fca5a5; }
+    .problem-card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .problem-card h3 { margin-bottom: 0.5rem; }
+
+    /* ===== SOLUTIONS ===== */
+    .solutions { background: var(--background-alt); }
+    .solutions-header { text-align: center; margin-bottom: 3.5rem; }
+    .solutions-header p { max-width: 600px; margin: 1rem auto 0; }
+    .solutions-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .solution-card {
+      padding: 2rem; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .solution-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .solution-card.flagship {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md), 0 0 0 1px var(--accent-light);
+    }
+    .solution-card.flagship::before {
+      content: 'MOST POPULAR'; position: absolute; top: 1rem; right: -2rem;
+      background: var(--accent); color: #fff; font-size: 0.6rem; font-weight: 700;
+      padding: 0.25rem 2.5rem; transform: rotate(45deg); letter-spacing: 0.05em;
+    }
+    .solution-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; font-size: 1.3rem;
+    }
+    .solution-icon.blue { background: #dbeafe; color: #2563eb; }
+    .solution-icon.green { background: #dcfce7; color: #16a34a; }
+    .solution-icon.amber { background: #fef3c7; color: #d97706; }
+    .solution-icon.purple { background: #f3e8ff; color: #9333ea; }
+    .solution-icon.rose { background: #ffe4e6; color: #e11d48; }
+    .solution-icon.cyan { background: #cffafe; color: #0891b2; }
+    .solution-icon.slate { background: #f1f5f9; color: #475569; }
+    .solution-card h3 { margin-bottom: 0.5rem; }
+    .solution-card p { font-size: 0.9rem; margin-bottom: 1.25rem; }
+    .solution-features { list-style: none; }
+    .solution-features li {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.85rem; color: var(--muted-foreground);
+      padding: 0.3rem 0;
+    }
+    .solution-features li::before {
+      content: '\2713'; color: var(--success); font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ===== PEDIGREE / ABOUT ===== */
+    .pedigree { background: var(--background); }
+    .pedigree-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .pedigree-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem;
+    }
+    .pedigree-stat {
+      padding: 1.25rem; border-radius: var(--radius);
+      background: var(--accent-subtle); border: 1px solid var(--accent-light);
+    }
+    .pedigree-stat h3 { color: var(--accent); font-size: 1.8rem; margin-bottom: 0.15rem; }
+    .pedigree-stat p { font-size: 0.8rem; }
+    .pedigree-text h2 { margin-bottom: 1rem; }
+    .pedigree-text > p { margin-bottom: 1rem; }
+    .pedigree-milestones { list-style: none; margin-top: 1.5rem; }
+    .pedigree-milestones li {
+      padding: 0.5rem 0; padding-left: 1.5rem; position: relative;
+      font-size: 0.9rem; color: var(--muted-foreground);
+    }
+    .pedigree-milestones li::before {
+      content: ''; position: absolute; left: 0; top: 0.85rem;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .pedigree-layout { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how-it-works { text-align: center; background: var(--background-alt); }
+    .how-it-works h2 { margin-bottom: 1rem; }
+    .how-it-works > .container > p { max-width: 550px; margin: 0 auto 3rem; }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem; position: relative;
+    }
+    .step {
+      padding: 2rem; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm); position: relative;
+    }
+    .step-number {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem;
+      margin: 0 auto 1.25rem;
+    }
+    .step h3 { margin-bottom: 0.5rem; }
+    .step p { font-size: 0.9rem; }
+
+    /* ===== RESULTS ===== */
+    .results { background: var(--background); }
+    .results-header { text-align: center; margin-bottom: 3rem; }
+    .results-header p { max-width: 550px; margin: 1rem auto 0; }
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .result-card {
+      padding: 2rem; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .result-card .metric { font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+    .result-card .label { font-size: 0.9rem; color: var(--foreground); font-weight: 600; margin-top: 0.25rem; }
+    .result-card .desc { font-size: 0.85rem; color: var(--muted-foreground); margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+
+    /* ===== CTA ===== */
+    .cta {
+      text-align: center; padding: 5rem 0;
+      background: linear-gradient(180deg, var(--background-alt) 0%, var(--accent-subtle) 100%);
+    }
+    .cta-inner {
+      max-width: 650px; margin: 0 auto;
+      padding: 3rem; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+    .cta-inner h2 { margin-bottom: 1rem; }
+    .cta-inner p { margin-bottom: 2rem; }
+    .cta-inner .btn { font-size: 1.05rem; padding: 0.9rem 2.25rem; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 2.5rem 0; border-top: 1px solid var(--border);
+      text-align: center; background: var(--background);
+    }
+    footer p { font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 1rem; }
+    .footer-links a { color: var(--muted-foreground); font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--foreground); }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0C13 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+        </div>
+        Waypoint AI
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Get Started</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <div class="badge"><span class="badge-dot"></span> Now serving Canadian small businesses</div>
+        <h1 style="margin-top: 1.5rem;">Your Business Grows.<br/><span>AI Does the Work.</span></h1>
+        <p>Waypoint AI helps small businesses generate more leads, convert more customers, and save hours every week — using AI-powered automation built by someone who\'s been in your corner for 20+ years.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Book a Free Strategy Call &rarr;</a>
+          <a href="#solutions" class="btn btn-outline">See Our Solutions</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <h3>20+</h3>
+            <p>Years in digital business</p>
+          </div>
+          <div class="hero-stat">
+            <h3>7</h3>
+            <p>AI solutions for SMBs</p>
+          </div>
+          <div class="hero-stat">
+            <h3>$0</h3>
+            <p>Upfront — pay for results</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="fade-in" style="text-align: center; margin-bottom: 3rem;">
+        <h2>Small Businesses Are Leaving Money on the Table</h2>
+        <p style="max-width: 600px; margin: 1rem auto 0;">You\'re great at what you do. But you\'re losing leads, wasting time on repetitive tasks, and watching competitors who embraced AI pull ahead.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card fade-in">
+          <div class="icon">&#128683;</div>
+          <h3>Leads Slip Through the Cracks</h3>
+          <p>You\'re too busy doing the work to follow up with every inquiry. By the time you respond, they\'ve called someone else.</p>
+        </div>
+        <div class="problem-card fade-in">
+          <div class="icon">&#9203;</div>
+          <h3>Buried in Admin Work</h3>
+          <p>Scheduling, invoicing, follow-ups, review requests — the operational stuff eats your evenings and weekends.</p>
+        </div>
+        <div class="problem-card fade-in">
+          <div class="icon">&#128176;</div>
+          <h3>“AI” Feels Overwhelming</h3>
+          <p>You know AI could help, but where do you start? Every tool promises the world. You need someone who speaks your language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="solutions" id="solutions">
+    <div class="container">
+      <div class="solutions-header fade-in">
+        <div class="badge" style="margin-bottom: 1rem;">AI-Powered Solutions</div>
+        <h2>Everything You Need to Grow Smarter</h2>
+        <p>From generating new leads to automating your back office — each solution is tailored to your business and pays for itself.</p>
+      </div>
+      <div class="solutions-grid">
+
+        <!-- Flagship -->
+        <div class="solution-card flagship fade-in">
+          <div class="solution-icon blue">&#127919;</div>
+          <h3>AI Lead Generation</h3>
+          <p>Targeted outbound campaigns that find and engage your ideal customers with personalized emails and calls — on autopilot.</p>
+          <ul class="solution-features">
+            <li>AI-crafted personalized outreach at scale</li>
+            <li>Prospect targeting by location, industry &amp; intent</li>
+            <li>Automated follow-up sequences</li>
+            <li>Real-time lead tracking dashboard</li>
+          </ul>
+        </div>
+
+        <!-- Inbound -->
+        <div class="solution-card fade-in">
+          <div class="solution-icon green">&#129302;</div>
+          <h3>AI Customer Support</h3>
+          <p>AI chatbots and phone agents that answer questions, qualify leads, and route inquiries — 24/7, even when you\'re off the clock.</p>
+          <ul class="solution-features">
+            <li>Instant response to every inquiry</li>
+            <li>Intelligent lead qualification</li>
+            <li>Seamless handoff to your team</li>
+          </ul>
+        </div>
+
+        <!-- Scheduling -->
+        <div class="solution-card fade-in">
+          <div class="solution-icon amber">&#128197;</div>
+          <h3>Smart Scheduling</h3>
+          <p>AI-powered booking that handles appointments, confirmations, reminders, and rescheduling — no more phone tag or no-shows.</p>
+          <ul class="solution-features">
+            <li>Automated booking &amp; confirmations</li>
+            <li>Smart reminders reduce no-shows by 40%+</li>
+            <li>Self-service rescheduling for clients</li>
+          </ul>
+        </div>
+
+        <!-- Reviews -->
+        <div class="solution-card fade-in">
+          <div class="solution-icon purple">&#11088;</div>
+          <h3>Reputation Management</h3>
+          <p>Automatically collect 5-star reviews from happy customers and respond to every review — building the online presence that wins new business.</p>
+          <ul class="solution-features">
+            <li>Automated review requests after every job</li>
+            <li>AI-drafted review responses</li>
+            <li>Sentiment monitoring &amp; alerts</li>
+          </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="solution-card fade-in">
+          <div class="solution-icon rose">&#128227;</div>
+          <h3>Content &amp; Social Automation</h3>
+          <p>AI generates and schedules social posts, email newsletters, and blog content — keeping you visible without the time commitment.</p>
+          <ul class="solution-features">
+            <li>AI-generated posts tailored to your brand</li>
+            <li>Multi-platform scheduling</li>
+            <li>Email newsletter automation</li>
+          </ul>
+        </div>
+
+        <!-- Workflows -->
+        <div class="solution-card fade-in">
+          <div class="solution-icon cyan">&#9881;&#65039;</div>
+          <h3>Workflow Automation</h3>
+          <p>Streamline your operations — from intake forms that auto-populate your CRM to invoice follow-ups and employee onboarding.</p>
+          <ul class="solution-features">
+            <li>CRM auto-population &amp; data sync</li>
+            <li>Automated invoicing &amp; payment reminders</li>
+            <li>Custom workflow design for your business</li>
+          </ul>
+        </div>
+
+        <!-- Consulting -->
+        <div class="solution-card fade-in" style="grid-column: 1 / -1; max-width: 720px; margin: 0 auto;">
+          <div class="solution-icon slate">&#128161;</div>
+          <h3>Full AI Strategy Consulting</h3>
+          <p>Not sure where to start? We\'ll assess your entire operation, identify the highest-impact automation opportunities, and build a custom roadmap — then implement it for you.</p>
+          <ul class="solution-features">
+            <li>End-to-end operations audit</li>
+            <li>Custom AI implementation roadmap</li>
+            <li>Hands-on build &amp; deployment</li>
+            <li>Ongoing optimization &amp; support</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / PEDIGREE -->
+  <section class="pedigree" id="about">
+    <div class="container">
+      <div class="pedigree-layout fade-in">
+        <div class="pedigree-text">
+          <div class="badge" style="margin-bottom: 1.25rem;">Your AI Partner</div>
+          <h2>Built by Someone Who Gets Small Business</h2>
+          <p style="color: var(--foreground); font-size: 1.05rem;">I\'m Nick Lee — and I\'ve spent my entire career helping businesses like yours grow with technology. From selling websites door-to-door in the \'90s to building and selling a venture-backed startup, I\'ve been in the trenches with small and medium-sized businesses for over two decades.</p>
+          <p>Waypoint AI isn\'t another faceless SaaS tool. It\'s a hands-on partnership with someone who understands your challenges, speaks your language, and has the technical chops to build solutions that actually work — powered by the latest AI.</p>
+          <ul class="pedigree-milestones">
+            <li>Started building websites for local businesses in the mid-1990s</li>
+            <li>Enterprise digital consulting with Fortune 500 companies</li>
+            <li>Founded and scaled a custom product startup across 3 continents</li>
+            <li>Built a fundraising platform for charities &amp; non-profits</li>
+            <li>Built and sold FlipGive — a Series A-funded marketplace for youth sports</li>
+            <li>Now: applying 20+ years of pattern recognition to AI automation for SMBs</li>
+          </ul>
+        </div>
+        <div class="pedigree-stats">
+          <div class="pedigree-stat">
+            <h3>20+</h3>
+            <p>Years in digital business</p>
+          </div>
+          <div class="pedigree-stat">
+            <h3>1000s</h3>
+            <p>SMBs served over career</p>
+          </div>
+          <div class="pedigree-stat">
+            <h3>5</h3>
+            <p>Businesses built &amp; launched</p>
+          </div>
+          <div class="pedigree-stat">
+            <h3>1</h3>
+            <p>Successful exit (FlipGive)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="fade-in">
+        <div class="badge" style="margin-bottom: 1.25rem;">Simple Process</div>
+        <h2>Up and Running in Days, Not Months</h2>
+        <p>No long contracts. No complicated onboarding. We move fast because your revenue can\'t wait.</p>
+      </div>
+      <div class="steps">
+        <div class="step fade-in">
+          <div class="step-number">1</div>
+          <h3>Free Strategy Call</h3>
+          <p>We talk about your business, where you\'re losing time and money, and identify the biggest AI opportunity — usually in 30 minutes.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step-number">2</div>
+          <h3>Custom Build</h3>
+          <p>We build your AI solution tailored to your specific business, customers, and workflows. No cookie-cutter templates.</p>
+        </div>
+        <div class="step fade-in">
+          <div class="step-number">3</div>
+          <h3>Launch &amp; Optimize</h3>
+          <p>Go live, track results in real time, and iterate. You see exactly what\'s working and what it\'s earning you — every month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="results">
+    <div class="container">
+      <div class="results-header fade-in">
+        <div class="badge" style="margin-bottom: 1.25rem;">What AI Delivers</div>
+        <h2>The Numbers Speak for Themselves</h2>
+        <p>Here\'s what small businesses typically see when they deploy AI-powered automation with Waypoint.</p>
+      </div>
+      <div class="results-grid">
+        <div class="result-card fade-in">
+          <div class="metric">3-5x</div>
+          <div class="label">More qualified leads per month</div>
+          <div class="desc">AI outreach runs 24/7, reaching prospects you\'d never have time to contact manually.</div>
+        </div>
+        <div class="result-card fade-in">
+          <div class="metric">15+ hrs</div>
+          <div class="label">Saved per week on admin tasks</div>
+          <div class="desc">Scheduling, follow-ups, review management, and data entry — handled automatically.</div>
+        </div>
+        <div class="result-card fade-in">
+          <div class="metric">&lt; 60 sec</div>
+          <div class="label">Average response time to inquiries</div>
+          <div class="desc">AI responds instantly to every lead — before they call your competitor.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-inner fade-in">
+        <div class="badge" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span> Limited availability</div>
+        <h2>Let\'s Find Your Biggest AI Opportunity</h2>
+        <p>Book a free 30-minute strategy call. We\'ll look at your business together and I\'ll tell you exactly where AI can make the biggest impact — no pressure, no pitch deck, just straight talk from someone who\'s been doing this for 20 years.</p>
+        <a href="mailto:nicholas.lee@njwl.net?subject=Waypoint%20AI%20%E2%80%94%20Strategy%20Call%20Request" class="btn btn-primary">Book Your Free Strategy Call &rarr;</a>
+        <p style="font-size: 0.8rem; margin-top: 1rem; margin-bottom: 0;">Currently onboarding a limited number of clients to ensure hands-on quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer
+    <div class="container">
+      <div class="footer-links">
+        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="mailto:nicholas.lee@njwl.net">Contact</a>
+      </div>
+      <p>&copy; 2026 <a href="https://waypointai.ca">Waypoint AI</a> — A division of NJWL Inc. &middot; Toronto, Canada</p>
+    </div>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(\'visible\');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(\'.fade-in\').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
