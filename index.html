@@ -214,6 +214,37 @@
       content: '\2713'; color: var(--success); font-weight: 700; flex-shrink: 0;
     }
 
+    /* ===== WHO IT'S FOR ===== */
+    .who-its-for { background: var(--background); }
+    .who-its-for-header { text-align: center; margin-bottom: 3.5rem; }
+    .who-its-for-header p { max-width: 620px; margin: 1rem auto 0; }
+    .industry-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .industry-card {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.5rem; border-radius: var(--radius);
+      background: var(--card); border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm); transition: all 0.2s;
+    }
+    .industry-card:hover {
+      box-shadow: var(--shadow-md); border-color: var(--accent-light);
+      transform: translateY(-1px);
+    }
+    .industry-icon {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; background: var(--accent-subtle); border: 1px solid var(--accent-light);
+    }
+    .industry-card h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
+    .industry-card p { font-size: 0.85rem; line-height: 1.55; }
+    .who-its-for-cta {
+      text-align: center; margin-top: 2.5rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .who-its-for-cta p { font-size: 0.95rem; margin-bottom: 1rem; }
+
     /* ===== PEDIGREE / ABOUT ===== */
     .pedigree { background: var(--background); }
     .pedigree-layout {
@@ -488,121 +519,7 @@
           <div class="solution-icon slate">&#128161;</div>
           <h3>Full AI Strategy Consulting</h3>
           <p>Not sure where to start? We'll assess your entire operation, identify the highest-impact automation opportunities, and build a custom roadmap — then implement it for you.</p>
-          <ul class="solution-features">
-            <li>End-to-end operations audit</li>
-            <li>Custom AI implementation roadmap</li>
-            <li>Hands-on build &amp; deployment</li>
-            <li>Ongoing optimization &amp; support</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT / PEDIGREE -->
-  <section class="pedigree" id="about">
-    <div class="container">
-      <div class="pedigree-layout fade-in">
-        <div class="pedigree-text">
-          <div class="badge" style="margin-bottom: 1.25rem;">Your AI Partner</div>
-          <h2>Built by Someone Who Gets Small Business</h2>
-          <p style="color: var(--foreground); font-size: 1.05rem;">I'm Nick Lee — and I've spent my entire career helping businesses like yours grow with technology. From selling websites door-to-door in the '90s to building and selling a venture-backed startup, I've been in the trenches with small and medium-sized businesses for over two decades.</p>
-          <p>Waypoint AI isn't another faceless SaaS tool. It's a hands-on partnership with someone who understands your challenges, speaks your language, and has the technical chops to build solutions that actually work — powered by the latest AI.</p>
-          <ul class="pedigree-milestones">
-            <li>Started building websites for local businesses in the mid-1990s</li>
-            <li>Enterprise digital consulting with Fortune 500 companies</li>
-            <li>Founded and scaled a custom product startup across 3 continents</li>
-            <li>Built a fundraising platform for charities &amp; non-profits</li>
-            <li>Built and sold FlipGive — a Series A-funded marketplace for youth sports</li>
-            <li>Now: applying 20+ years of pattern recognition to AI automation for SMBs</li>
-          </ul>
-        </div>
-        <div class="pedigree-stats">
-          <div class="pedigree-stat">
-            <h3>20+</h3>
-            <p>Years in digital business</p>
-          </div>
-          <div class="pedigree-stat">
-            <h3>1000s</h3>
-            <p>SMBs served over career</p>
-          </div>
-          <div class="pedigree-stat">
-            <h3>5</h3>
-            <p>Businesses built &amp; launched</p>
-          </div>
-          <div class="pedigree-stat">
-            <h3>1</h3>
-            <p>Successful exit (FlipGive)</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works" id="how-it-works">
-    <div class="container">
-      <div class="fade-in">
-        <div class="badge" style="margin-bottom: 1.25rem;">Simple Process</div>
-        <h2>Up and Running in Days, Not Months</h2>
-        <p>No long contracts. No complicated onboarding. We move fast because your revenue can't wait.</p>
-      </div>
-      <div class="steps">
-        <div class="step fade-in">
-          <div class="step-number">1</div>
-          <h3>Free Strategy Call</h3>
-          <p>We talk about your business, where you're losing time and money, and identify the biggest AI opportunity — usually in 30 minutes.</p>
-        </div>
-        <div class="step fade-in">
-          <div class="step-number">2</div>
-          <h3>Custom Build</h3>
-          <p>We build your AI solution tailored to your specific business, customers, and workflows. No cookie-cutter templates.</p>
-        </div>
-        <div class="step fade-in">
-          <div class="step-number">3</div>
-          <h3>Launch &amp; Optimize</h3>
-          <p>Go live, track results in real time, and iterate. You see exactly what's working and what it's earning you — every month.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESULTS -->
-  <section class="results" id="results">
-    <div class="container">
-      <div class="results-header fade-in">
-        <div class="badge" style="margin-bottom: 1.25rem;">What AI Delivers</div>
-        <h2>The Numbers Speak for Themselves</h2>
-        <p>Here's what small businesses typically see when they deploy AI-powered automation with Waypoint.</p>
-      </div>
-      <div class="results-grid">
-        <div class="result-card fade-in">
-          <div class="metric">3-5x</div>
-          <div class="label">More qualified leads per month</div>
-          <div class="desc">AI outreach runs 24/7, reaching prospects you'd never have time to contact manually.</div>
-        </div>
-        <div class="result-card fade-in">
-          <div class="metric">15+ hrs</div>
-          <div class="label">Saved per week on admin tasks</div>
-          <div class="desc">Scheduling, follow-ups, review management, and data entry — handled automatically.</div>
-        </div>
-        <div class="result-card fade-in">
-          <div class="metric">&lt; 60 sec</div>
-          <div class="label">Average response time to inquiries</div>
-          <div class="desc">AI responds instantly to every lead — before they call your competitor.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="contact">
-    <div class="container">
-      <div class="cta-inner fade-in">
-        <div class="badge" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span> Limited availability</div>
-        <h2>Let's Find Your Biggest AI Opportunity</h2>
-        <p>Book a free 30-minute strategy call. We'll look at your business together and I'll tell you exactly where AI can make the biggest impact — no pressure, no pitch deck, just straight talk from someone who's been doing this for 20 years.</p>
+          <ul class="solution-featraight talk from someone who's been doing this for 20 years.</p>
         <a href="mailto:nicholas.lee@njwl.net?subject=Waypoint%20AI%20—%20Strategy%20Call%20Request" class="btn btn-primary">Book Your Free Strategy Call &rarr;</a>
         <p style="font-size: 0.8rem; margin-top: 1rem; margin-bottom: 0;">Currently onboarding a limited number of clients to ensure hands-on quality.</p>
       </div>
@@ -618,7 +535,7 @@
         <a href="#how-it-works">How It Works</a>
         <a href="mailto:nicholas.lee@njwl.net">Contact</a>
       </div>
-      <p>&copy; 2026 <a href="https://waypointai.ca">Waypoint AI</a> — Toronto, Canada</p>
+      <p>&copy; 2026 <a href="https://waypointai.ca">Waypoint AI</a> &middot; Toronto, Canada</p>
     </div>
   </footer>
 
@@ -637,3 +554,4 @@
 
 </body>
 </html>
+
